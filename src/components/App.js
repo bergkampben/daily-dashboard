@@ -75,7 +75,9 @@ function App() {
                 </button>
               </div>
               <div className="github-link">
-                  <img src={GithubIcon} style={{"width": "80px"}}/>
+                  <a href="https://github.com/bergkampben/daily-dashboard">
+                    <img src={GithubIcon} style={{"width": "80px"}}/>
+                  </a>
               </div>
             </div>
           </div>
