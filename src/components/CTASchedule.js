@@ -2,6 +2,7 @@ import React from "react";
 import Select from 'react-select';
 var parseString = require('xml2js').parseString;
 
+var MAX_TRAIN_RESULTS = 12;
 
 var stationOptions = [
     { value: "40800", label: "Sedgwick" },
@@ -30,14 +31,12 @@ class CTASchedule extends React.Component {
     }
 
     getTrainSchedule = async () => {
-        console.log("Sending Request for: ", this.state.station_id);
         const response = await fetch('http://localhost:3001/cta-schedule?station=' + this.state.station_id);
         const body = await response.json();
 
         parseString(body.body, (err, result) => {
-            console.log("PARSED RESULTS");
             var etaXmls = result.ctatt.eta;
-            this.setState({arrivals_list: etaXmls, is_loading: false});
+            this.setState({arrivals_list: etaXmls.slice(0, MAX_TRAIN_RESULTS), is_loading: false});
             this.forceUpdate();
         });
       };
@@ -118,7 +117,6 @@ class CTASchedule extends React.Component {
       return Math.abs(Math.round(diff));
     }
     displayTrainSchedule = () => {
-        console.log("displayTrainSchedule");
         if (!this.state.is_loading && this.state.arrivals_list.length > 0) {
           var cur_time = new Date();
           const colourStyles = {
@@ -207,7 +205,6 @@ class CTASchedule extends React.Component {
     }
 
     render() {
-        console.log("RENDER");
         return (
             <div>
                 {this.loadingMessage()}
