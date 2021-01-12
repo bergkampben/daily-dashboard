@@ -158,11 +158,13 @@ setInterval(mark_cta_unset, 60000); // 1 Minute for CTA
 
 
 if (process.env.NODE_ENV === "production") {
+  console.log("Serving prod resource");
   app.use(express.static("build"));
   app.get("*", (req, res) => res.sendFile(path.resolve("build", "index.html")));
 }
 
 if (process.env.NODE_ENV === "dev") {
+  console.log("Serving dev resource");
   app.use(express.static("public"));
   app.get("*", (req, res) =>
     res.sendFile(path.resolve("public", "index.html"))
