@@ -10,7 +10,7 @@ const [stock_prices, set_stock_prices] = useState([]);
 const [isLoading, setIsLoading ] = useState(true);
 
 const getTopics = async (symbol) => {
-    const response = await fetch('http://localhost:3001/stock-price?symbol=' + symbol);
+    const response = await fetch('/api/stock-price?symbol=' + symbol);
     const body = await response.json();
     if (response.status !== 200) throw Error(body.message);
     return body;

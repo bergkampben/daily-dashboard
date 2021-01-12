@@ -12,7 +12,7 @@ const Weather = () => {
     const [isLoading, setIsLoading ] = useState(true);
 
     const getWeather = async () => {
-        const response = await fetch('http://localhost:3001/weather');
+        const response = await fetch('api/weather');
         const body = await response.json();
         if (response.status != 200) throw Error(body.message);
         return body;

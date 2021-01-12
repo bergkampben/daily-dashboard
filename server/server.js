@@ -37,16 +37,17 @@ var cta_set_data = {};
 var stock_data = {};
 var stock_set_data = {};
 
-const cors = require('cors')
-const app = express()
-app.use(cors())
-const port = 3001;
+const cors = require('cors');
+const app = express();
+app.use(cors());
+const port = process.env.PORT || 3001;
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-app.get('/twitter-results', async (req, res) => {
+app.get('/api/twitter-results', async (req, res) => {
     const token = BEARER_TOKEN;
     const requestConfig = {
       url: hashtagURL,
@@ -85,7 +86,7 @@ async function get_cta_schedule(station) {
   return cta_data[station];
 }
 
-app.get('/cta-schedule', async (req, res) => {
+app.get('/api/cta-schedule', async (req, res) => {
   
   var station = req.query.station;
   var schedule = await get_cta_schedule(station);
@@ -106,7 +107,7 @@ async function get_stock_prices(symbol) {
   return stock_data[symbol];
 }
 
-app.get('/stock-price', async (req, res) => {
+app.get('/api/stock-price', async (req, res) => {
 
   var symbol = req.query.symbol;
   var prices = await get_stock_prices(symbol);
@@ -127,7 +128,7 @@ async function get_weather() {
   weather_set = true;
 }
 
-app.get('/weather', async (req, res) => {
+app.get('/api/weather', async (req, res) => {
 
   if (!weather_set) {
     await get_weather();

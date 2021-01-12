@@ -2,7 +2,6 @@
   "name": "personal-dashboard",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3000/",
   "dependencies": {
     "@craco/craco": "^6.0.0",
     "@tailwindcss/postcss7-compat": "^2.0.2",
@@ -35,14 +34,15 @@
     "xml2js": "^0.4.23"
   },
   "scripts": {
-    "start": "npm run development",
-    "development": "concurrently --kill-others \"npm run client\" \"npm run server\"",
+    "start": "npm run server",
+    "dev": "concurrently --kill-others \"npm run client\" \"npm run server\"",
     "production": "npm run build; $Env:NODE_ENV=\"production\"; npm run server",
     "client": "craco start",
     "server": "node server/server.js",
     "build": "craco build",
     "test": "craco test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "heroku-postbuild": "npm run build"
   },
   "eslintConfig": {
     "extends": [

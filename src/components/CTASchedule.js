@@ -31,7 +31,7 @@ class CTASchedule extends React.Component {
     }
 
     getTrainSchedule = async () => {
-        const response = await fetch('http://localhost:3001/cta-schedule?station=' + this.state.station_id);
+        const response = await fetch('/api/cta-schedule?station=' + this.state.station_id);
         const body = await response.json();
 
         parseString(body.body, (err, result) => {
