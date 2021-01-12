@@ -156,4 +156,17 @@ setInterval(mark_weather_unset, 600000); // 10 Minutes for Weather
 setInterval(mark_stocks_unset, 600000); // 10 Minutes for Stocks
 setInterval(mark_cta_unset, 60000); // 1 Minute for CTA
 
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("build"));
+  app.get("*", (req, res) => res.sendFile(path.resolve("build", "index.html")));
+}
+
+if (process.env.NODE_ENV === "dev") {
+  app.use(express.static("public"));
+  app.get("*", (req, res) =>
+    res.sendFile(path.resolve("public", "index.html"))
+  );
+}
+
 app.listen(port, () => console.log(`Listening on port ${port}`));
