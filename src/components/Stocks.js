@@ -58,7 +58,7 @@ const getTopics = async (symbol) => {
 
   }, []);
   
-  const get_px_pct_diff = (px) => {
+  const get_price_diff = (px) => {
     var px_diff_pct = (px.c - px.pc).toFixed(2);
     if (px_diff_pct < 0) {
         return (
@@ -75,7 +75,7 @@ const getTopics = async (symbol) => {
     }
   }
 
-  const get_price_diff = (px) => {
+  const get_px_pct_diff = (px) => {
       var px_diff = (((px.c - px.pc) / px.pc) * 100).toFixed(2);
       if (px_diff < 0) {
           return (
