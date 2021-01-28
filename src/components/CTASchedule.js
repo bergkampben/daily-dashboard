@@ -91,6 +91,13 @@ class CTASchedule extends React.Component {
                 </div>
             )
           }
+          else if (line == "Red") {
+            return (
+                <div className={"train-line red-line"}>
+                    RED
+                </div>
+            )
+          }
         else {
             return (
             <div>{line}</div>
