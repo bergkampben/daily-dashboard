@@ -8,6 +8,7 @@ var stationOptions = [
     { value: "40800", label: "Sedgwick" },
     { value: "41510", label: "Morgan"},
     { value: "40380", label: "Clark/Lake" },
+    { value: "41400", label: "Roosevelt"},
     { value: "40530", label: "Diversey" }
 ]
 
