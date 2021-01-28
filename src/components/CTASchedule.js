@@ -17,6 +17,7 @@ class CTASchedule extends React.Component {
         super(props);
         this.state = {
             arrivals_list: [],
+            timestamp: "",
             station_id: "40380",
             is_loading: true
         }
@@ -36,8 +37,9 @@ class CTASchedule extends React.Component {
         const body = await response.json();
 
         parseString(body.body, (err, result) => {
+            var time = result.ctatt.tmst;
             var etaXmls = result.ctatt.eta;
-            this.setState({arrivals_list: etaXmls.slice(0, MAX_TRAIN_RESULTS), is_loading: false});
+            this.setState({arrivals_list: etaXmls.slice(0, MAX_TRAIN_RESULTS), timestamp: time, is_loading: false});
             this.forceUpdate();
         });
       };
@@ -122,11 +124,16 @@ class CTASchedule extends React.Component {
     diff_minutes = (dt1, dt2) => {
       var diff =(dt2.getTime() - dt1.getTime()) / 1000;
       diff /= 60;
-      return Math.abs(Math.round(diff));
+      var minutes = Math.abs(Math.round(diff));
+      if (minutes < 2) {
+          return "DUE";
+      } else {
+          return minutes;
+      }
     }
     displayTrainSchedule = () => {
         if (!this.state.is_loading && this.state.arrivals_list.length > 0) {
-          var cur_time = new Date();
+          var cur_time = this.data_from_cta_str(this.state.timestamp);
           const colourStyles = {
               control: styles => ({ ...styles, backgroundColor: '#2a2a2a', color: "white" }),
               option: (styles, { data, isDisabled, isFocused, isSelected }) => {
