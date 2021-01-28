@@ -133,7 +133,7 @@ class CTASchedule extends React.Component {
     }
     displayTrainSchedule = () => {
         if (!this.state.is_loading && this.state.arrivals_list.length > 0) {
-          var cur_time = this.data_from_cta_str(this.state.timestamp);
+          var cur_time = this.date_from_cta_str(this.state.timestamp);
           const colourStyles = {
               control: styles => ({ ...styles, backgroundColor: '#2a2a2a', color: "white" }),
               option: (styles, { data, isDisabled, isFocused, isSelected }) => {
