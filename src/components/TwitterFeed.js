@@ -10,6 +10,7 @@ const [trending_topics, set_trending_topics] = useState([]);
 const [isLoading, setIsLoading ] = useState(true);
 
 const getTopics = async () => {
+    console.log("GET_TWITTER_TOPICS");
     const response = await fetch('/api/twitter-results');
     const body = await response.json();
     if (response.status !== 200) throw Error(body.message);

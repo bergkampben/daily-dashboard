@@ -35,11 +35,8 @@ class CTASchedule extends React.Component {
     getTrainSchedule = async () => {
         const response = await fetch('/api/cta-schedule?station=' + this.state.station_id);
         const body = await response.json();
-        console.log("CTA DATA ARRIVED");
-        console.dir(body);
 
         parseString(body.body, (err, result) => {
-            console.dir(result);
             var time = result.ctatt.tmst;
             var etaXmls = result.ctatt.eta;
             this.setState({arrivals_list: etaXmls.slice(0, MAX_TRAIN_RESULTS), timestamp: time, is_loading: false});
@@ -116,7 +113,6 @@ class CTASchedule extends React.Component {
     }
     
     date_from_cta_str = (input_str) => {
-    console.log("dateStr: ", input);
      var min = parseInt(input_str.substring(12,14));
      var hour = parseInt(input_str.substring(9,11));
      var arrival_time = new Date();
