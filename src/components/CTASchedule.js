@@ -37,7 +37,7 @@ class CTASchedule extends React.Component {
         const body = await response.json();
 
         parseString(body.body, (err, result) => {
-            var time = result.ctatt.tmst;
+            var time = result.ctatt.tmst[0];
             var etaXmls = result.ctatt.eta;
             this.setState({arrivals_list: etaXmls.slice(0, MAX_TRAIN_RESULTS), timestamp: time, is_loading: false});
             this.forceUpdate();
